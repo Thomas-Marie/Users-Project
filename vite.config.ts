@@ -6,6 +6,6 @@ dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/Users-project/",
+  base: "/",
   plugins: [react()],
 });
