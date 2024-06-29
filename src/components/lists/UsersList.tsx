@@ -1,10 +1,11 @@
 import React from "react";
-import { User } from "../../types/user";
+import { User as UserType } from "../../types/user";
+import User from "./User";
 
 interface UserListProps {
-  users: User[];
-  selectedUser: User | null;
-  onUserClick: (user: User) => void;
+  users: UserType[];
+  selectedUser: UserType | null;
+  onUserClick: (user: UserType) => void;
 }
 
 const UserList: React.FC<UserListProps> = ({ users, selectedUser, onUserClick }) => {
@@ -13,17 +14,7 @@ const UserList: React.FC<UserListProps> = ({ users, selectedUser, onUserClick })
       <h2 className='text-xl font-bold mb-4'>Utilisateurs GitHub</h2>
       <ul className='space-y-4'>
         {users.length > 0 ? (
-          users.map((user) => (
-            <li
-              key={user.login}
-              onClick={() => onUserClick(user)}
-              className={`p-4 border rounded shadow cursor-pointer hover:bg-gray-100 ${selectedUser?.login === user.login ? "bg-gray-100" : ""}`}>
-              <div className='flex items-center space-x-4'>
-                <img src={user.avatar_url} alt={`Profil de ${user.login}`} className='w-12 h-12 rounded-full' />
-                <span>{user.login}</span>
-              </div>
-            </li>
-          ))
+          users.map((user) => <User key={user.login} user={user} onUserClick={onUserClick} selectedUser={selectedUser} />)
         ) : (
           <li>Chargement des utilisateurs...</li>
         )}
