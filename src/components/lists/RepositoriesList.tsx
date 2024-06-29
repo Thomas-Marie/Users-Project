@@ -1,6 +1,6 @@
-import React from "react";
 import { Repo } from "../../types/repo";
 import { User } from "../../types/user";
+import Repository from "./Repository";
 
 interface RepositoryListProps {
   selectedUser: User | null;
@@ -21,15 +21,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ selectedUser, repositor
           ) : (
             <ul className='list-none pl-5 grid grid-cols-2 gap-6 mt-4'>
               {repositories.map((repo) => (
-                <li key={repo.id} className='mb-4'>
-                  <a
-                    href={repo.html_url}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='p-4 border rounded shadow cursor-pointer hover:bg-gray-100 text-blue-500'>
-                    {repo.name.length > 20 ? `${repo.name.substring(0, 20)}...` : repo.name}
-                  </a>
-                </li>
+                <Repository key={repo.id} repo={repo} />
               ))}
             </ul>
           )}
